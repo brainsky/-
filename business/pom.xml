@@ -1,0 +1,183 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<relativePath>../integrated4war</relativePath>
+		<groupId>hospital</groupId>
+		<artifactId>integrated4war</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>business</artifactId>
+	<packaging>war</packaging>
+	<name>business Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<!-- 技术架构 -->
+		<dependency>
+			<groupId>hospital</groupId>
+			<artifactId>techframe</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>hospital</groupId>
+			<artifactId>utils</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- 技术架构 -->
+		<!-- dbcp -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+		<!-- dbcp -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.0</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- ojdbc -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- ojdbc -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- jstl标签 -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<!-- 文件上传 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<!-- commons io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<!-- json转换 ,springmvc 返回json格式必须加入 -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.11</version>
+		</dependency>
+		<!-- dwr -->
+		<dependency>
+			<groupId>org.directwebremoting</groupId>
+			<artifactId>dwr</artifactId>
+			<version>3.0.M1</version>
+		</dependency>
+
+	</dependencies>
+	<build>
+		<finalName>business</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!-- war包插件 -->
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/java</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+            <!-- tomcat -->
+            <plugin>
+            	<groupId>org.codehaus.cargo</groupId>
+            	<artifactId>cargo-maven2-plugin</artifactId>
+            	<version>1.4.9</version>
+            	<configuration>
+					<container>
+						<containerId>tomcat8x</containerId>
+						<home>D:/Tomcat/Tomcat/apache-tomcat-8.0.43</home>
+					</container>
+					<configuration>
+						<type>existing</type>
+						<home>D:/Tomcat/Tomcat/apache-tomcat-8.0.43</home>
+					</configuration>
+				</configuration>
+				<executions>
+					<execution>
+						<id>cargo-run</id>
+						<phase>install</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+            </plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-resources-plugin
+										</artifactId>
+										<versionRange>
+											[2.6,)
+										</versionRange>
+										<goals>
+											<goal>resources</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
